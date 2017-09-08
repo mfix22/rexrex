@@ -1,0 +1,17 @@
+{
+  "name": "rexrex",
+  "version": "1.0.0",
+  "description": "Regex utils that rock!",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "regex",
+    "util",
+    "utility",
+    "compose"
+  ],
+  "author": "mfix22",
+  "license": "MIT"
+}
