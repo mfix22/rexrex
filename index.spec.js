@@ -12,7 +12,7 @@ const {
   regex,
   flags
 } = require('.')
-describe('Rox', () => {
+describe('rexrex', () => {
   test('regex', () => {
     const rex = regex(
       whole(
