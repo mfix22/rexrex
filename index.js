@@ -66,13 +66,3 @@ module.exports = exports.default = {
   },
   regex
 }
-
-console.log(regex(
-  or(
-    and(alpha(1), numeric(7)),
-    and(alpha(1), numeric(18)),
-    and(numeric(8, 9)),
-    and(numeric(16)),
-    and(alpha(8)),
-  )
-));
