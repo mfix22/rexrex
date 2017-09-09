@@ -86,3 +86,37 @@ regex(
 )
 // -> /[A-z]{1}\d{7}|[A-z]{1}\d{18}|\d{8,9}|\d{16}|[A-z]{8}/
 ```
+
+```javascript
+// matches GraphQL queries/mutations
+
+regex(
+  and(
+    capture(
+      and(
+        capture(or(...GQL_TYPES)),
+        extra(SPACE),
+        extra(WORD),
+        extra(SPACE),
+        wildGroup(and('on', extra(SPACE), extra(WORD)))
+      )
+    ),
+    wildcard(SPACE),
+    wildGroup(
+      and(
+        extraGroup(and('{', extraGroup(CHARS))),
+        extraGroup(and('}', extraGroup(CHARS)))
+      )
+    ),
+    '}'
+  ),
+  'g'
+)
+
+// -> /((fragment|query|mutation|subscription)\s+\w+\s+(on\s+\w+)*)\s*(({(\s|\w|(".*")|:|,|\.|\)|\()+)+(}(\s|\w|(".*")|:|,|\.|\)|\()+)+)+}/g
+```
+
+### Bonus
+- Tiny!
+- Super-readable!
+- Changes make sense!
