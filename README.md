@@ -110,7 +110,7 @@ regex(
     ),
     '}'
   ),
-  'g'
+  flags.GLOBAL
 )
 
 // -> /((fragment|query|mutation|subscription)\s+\w+\s+(on\s+\w+)*)\s*(({(\s|\w|(".*")|:|,|\.|\)|\()+)+(}(\s|\w|(".*")|:|,|\.|\)|\()+)+)+}/g
