@@ -1,5 +1,6 @@
 # `rexrex`
 Regular Expression utils that rock!
+Create regular expressions that are composable, reusable, and commentable.
 
 ## Utils
 
@@ -13,13 +14,14 @@ whole('sentence to match') // -> ^sentence to match$
 repeat('\\d')       // -> \\d
 repeat('\\d', 8)    // -> \\d{8}
 repeat('\\d', 1, 3) // -> \\d{1,3}
+repeat('\\d', 1, Infinity) // -> \\d{1,}
 ```
 
 #### `numeric`
-Equivalent to `rex.bind(null, '\\d')`
+Equivalent to `rex.repeat.bind(null, '\\d')`
 
 #### `alpha`
-Equivalent to `rex.bind(null, '[A-z]')`
+Equivalent to `rex.repeat.bind(null, '[A-z]')`
 
 #### `and`
 ```javascript
@@ -42,6 +44,12 @@ extra('.', false)         // -> '.+'
 #### `capture`
 ```javascript
 capture('\\d+?') // -> (\\d+?)
+```
+
+#### `group`
+Similar to (...), but won't capture the match within the parentheses
+```javascript
+group('\\d+?') // -> (?:\\d+?)
 ```
 
 #### `regex`
@@ -71,6 +79,8 @@ regex(matchers.not.ALPHA) // -> '[^A-z]'
 - `UNICODE`: `'u'`
 
 ### Examples
+See `index.spec.js` for all the uses!
+
 ```javascript
 // found in `graphql-types-drivers-license`
 

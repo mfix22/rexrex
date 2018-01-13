@@ -8,6 +8,7 @@ const {
   wildcard,
   extra,
   capture,
+  group,
   matchers,
   regex,
   flags
@@ -47,15 +48,18 @@ describe('rexrex', () => {
       UNICODE: 'u'
     })
   })
-  test('capture', () => {
+  test('capture/group', () => {
     expect(capture('test')).toEqual('(test)')
+    expect(capture('test', true)).toEqual('(?:test)')
     expect(capture('')).toEqual('')
     expect(capture()).toEqual('')
+    expect(group('test')).toEqual('(?:test)')
   })
   test('ALL', () => expect(matchers.ALL).toEqual('(.|\\s)'))
   test('Repeat', () => {
     expect(repeat('8')).toEqual('8')
     expect(repeat('8', 1)).toEqual('8{1}')
     expect(repeat('8', 1, 2)).toEqual('8{1,2}')
+    expect(repeat('8', 1, Infinity)).toEqual('8{1,}')
   })
 })

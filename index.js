@@ -10,10 +10,16 @@ const ANY = '.'
 const START = '^'
 const END = '$'
 const LAZY = '?'
+const GROUP = '?:'
 
 const whole = v => `${START}${v}${END}`
-const repeat = (v, start, finish) =>
-  `${v}${start == null ? '' : `{${start}`}${finish ? `,${finish}` : ''}${start == null ? '' : '}'}`
+const repeat = (v, start, end) => {
+  const finish = end === Infinity
+    ? ''
+    : end
+
+  return `${v}${start == null ? '' : `{${start}`}${finish != null ? `,${finish}` : ''}${start == null ? '' : '}'}`
+}
 
 const numeric = repeat.bind(null, NUMBER)
 const alpha = repeat.bind(null, ALPHA)
@@ -24,7 +30,8 @@ const or = (...rest) => rest.join('|')
 const wildcard = (v, lazy) => `${v}*${lazy ? LAZY : ''}`
 const extra = (v, lazy) => `${v}+${lazy ? LAZY : ''}`
 
-const capture = v => v && v.length ? `(${v})` : ''
+const capture = (v, dont) => v && v.length ? `(${dont ? GROUP : ''}${v})` : ''
+const group = v => capture(v, true)
 
 const ALL = capture(or(ANY, WHITE_SPACE)) // matches any character or whitespace
 
@@ -40,10 +47,12 @@ module.exports = exports.default = {
   wildcard,
   extra,
   capture,
+  group,
   matchers: {
     ALL,
     ANY,
     LAZY,
+    GROUP,
     ALPHA,
     NUMBER,
     WORD,
