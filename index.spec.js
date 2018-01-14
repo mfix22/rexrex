@@ -50,10 +50,10 @@ describe('rexrex', () => {
   })
   test('capture/group', () => {
     expect(capture('test')).toEqual('(test)')
-    expect(capture('test', true)).toEqual('(?:test)')
     expect(capture('')).toEqual('')
     expect(capture()).toEqual('')
     expect(group('test')).toEqual('(?:test)')
+    expect(group()).toEqual('')
   })
   test('ALL', () => expect(matchers.ALL).toEqual('(.|\\s)'))
   test('Repeat', () => {
