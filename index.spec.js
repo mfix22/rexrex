@@ -52,6 +52,8 @@ describe('rexrex', () => {
     expect(capture('test')).toEqual('(test)')
     expect(capture('')).toEqual('')
     expect(capture()).toEqual('')
+    expect(capture('\\d+', 'number')).toEqual('(?<number>\\d+)')
+    expect(capture('\\d+', {})).toEqual('(\\d+)')
     expect(group('test')).toEqual('(?:test)')
     expect(group()).toEqual('')
   })

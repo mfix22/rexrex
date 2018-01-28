@@ -30,7 +30,10 @@ const or = (...rest) => rest.join('|')
 const wildcard = (v, lazy) => `${v}*${lazy ? LAZY : ''}`
 const extra = (v, lazy) => `${v}+${lazy ? LAZY : ''}`
 
-const capture = v => v && v.length ? `(${v})` : ''
+const capture = (v, name) => v && v.length
+  ? `(${typeof name === 'string' ? `?<${name}>` : ''}${v})`
+  : ''
+
 const group = v => v && v.length ? `(${GROUP}${v})` : ''
 
 const ALL = capture(or(ANY, WHITE_SPACE)) // matches any character or whitespace

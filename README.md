@@ -45,11 +45,15 @@ extra('.', false)         // -> '.+'
 ```javascript
 capture('\\d+?') // -> (\\d+?)
 ```
+or you can name your capture group with `capture(pattern, name)`
+```javascript
+capture('\\d+?', 'number') // -> (?<number>\\d+?)
+```
 
 #### `group`
-Similar to (...), but won't capture the match within the parentheses
+Similar to a capture(...), but won't keep the capture within the parentheses
 ```javascript
-group('\\d+?') // -> (?:\\d+?)
+group('.|\\s') // -> (?:.|\\s)
 ```
 
 #### `regex`
