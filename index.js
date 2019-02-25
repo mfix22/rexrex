@@ -37,7 +37,8 @@ const group = v => (v && v.length ? `(${GROUP}${v})` : '')
 
 const ALL = capture(or(ANY, WHITE_SPACE)) // matches any character or whitespace
 
-const look = posOrNeg => text => `(?${posOrNeg ? '=' : '!'}${text})`
+const look = (posOrNeg, behindOrAhead) => text =>
+  `(?${behindOrAhead ? '<' : ''}${posOrNeg ? '=' : '!'}${text})`
 
 const regex = (...args) => new RegExp(...args)
 
@@ -53,9 +54,13 @@ module.exports = exports.default = {
   capture,
   group,
   look: {
-    ahead: Object.assign(look(true), {
-      positive: look(true),
-      negative: look(false)
+    ahead: Object.assign(look(true, false), {
+      positive: look(true, false),
+      negative: look(false, false)
+    }),
+    behind: Object.assign(look(true, true), {
+      positive: look(true, true),
+      negative: look(false, true)
     })
   },
   matchers: {

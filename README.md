@@ -75,13 +75,15 @@ Similar to a capture(...), but won't keep the capture within the parentheses
 group('.|\\s') // -> (?:.|\\s)
 ```
 
-### `look.ahead.(positive|negative)`
+### `look.(ahead|behind).(positive|negative)`
 
 Creates a [negative or positive look-ahead](https://www.stefanjudis.com/today-i-learned/the-complicated-syntax-of-lookaheads-in-javascript-regular-expressions/)
 
 ```javascript
-look.ahead.positive('Y') // -> '(?=y)'
+look.ahead.positive('Y') === look.ahead('Y') // -> '(?=y)'
 look.ahead.negative('Y') // -> '(?!y)'
+look.behind.positive('Y') === look.behind('Y') // -> '(?<=y)'
+look.behind.negative('Y') // -> '(?<!y)'
 ```
 
 #### `regex`

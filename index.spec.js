@@ -53,8 +53,12 @@ describe('rexrex', () => {
     expect(repeat('8', 1, 2)).toEqual('8{1,2}')
     expect(repeat('8', 1, Infinity)).toEqual('8{1,}')
   })
-  test('Look ahead', () => {
+  test('Look ahead/behind', () => {
+    expect(look.ahead('8')).toEqual('(?=8)')
     expect(look.ahead.positive('8')).toEqual('(?=8)')
     expect(look.ahead.negative('8')).toEqual('(?!8)')
+    expect(look.behind('8')).toEqual('(?<=8)')
+    expect(look.behind.positive('8')).toEqual('(?<=8)')
+    expect(look.behind.negative('8')).toEqual('(?<!8)')
   })
 })
