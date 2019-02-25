@@ -1,6 +1,6 @@
 {
   "name": "rexrex",
-  "version": "1.2.2",
+  "version": "1.3.0",
   "description": "Regex utils that rock!",
   "main": "index.js",
   "scripts": {
