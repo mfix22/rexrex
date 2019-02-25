@@ -1,6 +1,7 @@
-# `rexrex`
+# 🐺 `rexrex`
 
-Regular Expression utils that rock!
+> Regular Expression utils that rock!
+
 Create regular expressions that are composable, reusable, and commentable.
 
 ## Getting started
