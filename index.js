@@ -53,10 +53,10 @@ module.exports = exports.default = {
   capture,
   group,
   look: {
-    ahead: {
+    ahead: Object.assign(look(true), {
       positive: look(true),
       negative: look(false)
-    }
+    })
   },
   matchers: {
     ALL,
