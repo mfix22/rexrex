@@ -14,11 +14,11 @@ const GROUP = '?:'
 
 const whole = v => `${START}${v}${END}`
 const repeat = (v, start, end) => {
-  const finish = end === Infinity
-    ? ''
-    : end
+  const finish = end === Infinity ? '' : end
 
-  return `${v}${start == null ? '' : `{${start}`}${finish != null ? `,${finish}` : ''}${start == null ? '' : '}'}`
+  return `${v}${start == null ? '' : `{${start}`}${finish != null ? `,${finish}` : ''}${
+    start == null ? '' : '}'
+  }`
 }
 
 const numeric = repeat.bind(null, NUMBER)
@@ -30,13 +30,14 @@ const or = (...rest) => rest.join('|')
 const wildcard = (v, lazy) => `${v}*${lazy ? LAZY : ''}`
 const extra = (v, lazy) => `${v}+${lazy ? LAZY : ''}`
 
-const capture = (v, name) => v && v.length
-  ? `(${typeof name === 'string' ? `?<${name}>` : ''}${v})`
-  : ''
+const capture = (v, name) =>
+  v && v.length ? `(${typeof name === 'string' ? `?<${name}>` : ''}${v})` : ''
 
-const group = v => v && v.length ? `(${GROUP}${v})` : ''
+const group = v => (v && v.length ? `(${GROUP}${v})` : '')
 
 const ALL = capture(or(ANY, WHITE_SPACE)) // matches any character or whitespace
+
+const look = posOrNeg => text => `(?${posOrNeg ? '=' : '!'}${text})`
 
 const regex = (...args) => new RegExp(...args)
 
@@ -51,6 +52,12 @@ module.exports = exports.default = {
   extra,
   capture,
   group,
+  look: {
+    ahead: {
+      positive: look(true),
+      negative: look(false)
+    }
+  },
   matchers: {
     ALL,
     ANY,

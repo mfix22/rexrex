@@ -1,8 +1,10 @@
 # `rexrex`
+
 Regular Expression utils that rock!
 Create regular expressions that are composable, reusable, and commentable.
 
 ## Getting started
+
 ```sh
 yarn add rexrex
 ```
@@ -10,61 +12,84 @@ yarn add rexrex
 ## Utils
 
 #### `whole`
+
 ```javascript
 whole('sentence to match') // -> ^sentence to match$
 ```
 
 #### `repeat`
+
 ```javascript
-repeat('\\d')       // -> \\d
-repeat('\\d', 8)    // -> \\d{8}
+repeat('\\d') // -> \\d
+repeat('\\d', 8) // -> \\d{8}
 repeat('\\d', 1, 3) // -> \\d{1,3}
 repeat('\\d', 1, Infinity) // -> \\d{1,}
 ```
 
 #### `numeric`
+
 Equivalent to `rex.repeat.bind(null, '\\d')`
 
 #### `alpha`
+
 Equivalent to `rex.repeat.bind(null, '[A-z]')`
 
 #### `and`
+
 ```javascript
 and('a', 'b', 'c') // -> 'abc'
 ```
 
 #### `or`
+
 ```javascript
 or('a', 'b', 'c') // -> 'a|b|c'
 ```
 
 #### `wildcard` and `extra`
+
 ```javascript
-wildcard('.')             // -> '.*'
-wildcard('.', true)       // -> '.*?'
+wildcard('.') // -> '.*'
+wildcard('.', true) // -> '.*?'
 extra('.', matchers.LAZY) // -> '.+?'
-extra('.', false)         // -> '.+'
+extra('.', false) // -> '.+'
 ```
 
 #### `capture`
+
 ```javascript
 capture('\\d+?') // -> (\\d+?)
 ```
+
 or you can name your capture group with `capture(pattern, name)`
+
 ```javascript
 capture('\\d+?', 'number') // -> (?<number>\\d+?)
 ```
 
 #### `group`
+
 Similar to a capture(...), but won't keep the capture within the parentheses
+
 ```javascript
 group('.|\\s') // -> (?:.|\\s)
 ```
 
+### `look.ahead.(positive|negative)`
+
+Creates a [negative or positive look-ahead](https://www.stefanjudis.com/today-i-learned/the-complicated-syntax-of-lookaheads-in-javascript-regular-expressions/)
+
+```javascript
+look.ahead.positive('Y') // -> '(?=y)'
+look.ahead.negative('Y') // -> '(?!y)'
+```
+
 #### `regex`
+
 Equal to `RegExp` constructor
 
 ### Matchers
+
 - `ALPHA`: `'[A-z]'`
 - `WORD`: `'\\w'`
 - `NUMBER`: `'\\d'`
@@ -75,12 +100,15 @@ Equal to `RegExp` constructor
 - `LAZY`: `'?'`
 
 ### `not`
+
 Matches opposite of `matchers`
+
 ```javascript
 regex(matchers.not.ALPHA) // -> '[^A-z]'
 ```
 
 ### Flags
+
 - `GLOBAL`: `'g'`
 - `MULTI_LINE`: `'m'`
 - `INSENSITIVE`: `'i'`
@@ -88,6 +116,7 @@ regex(matchers.not.ALPHA) // -> '[^A-z]'
 - `UNICODE`: `'u'`
 
 ### Examples
+
 See `index.spec.js` for all the uses!
 
 ```javascript
@@ -100,7 +129,7 @@ regex(
     and(alpha(1), numeric(18)),
     and(numeric(8, 9)),
     and(numeric(16)),
-    and(alpha(8)),
+    and(alpha(8))
   )
 )
 // -> /[A-z]{1}\d{7}|[A-z]{1}\d{18}|\d{8,9}|\d{16}|[A-z]{8}/
@@ -122,10 +151,7 @@ regex(
     ),
     wildcard(SPACE),
     wildGroup(
-      and(
-        extraGroup(and('{', extraGroup(CHARS))),
-        extraGroup(and('}', extraGroup(CHARS)))
-      )
+      and(extraGroup(and('{', extraGroup(CHARS))), extraGroup(and('}', extraGroup(CHARS))))
     ),
     '}'
   ),
@@ -136,6 +162,7 @@ regex(
 ```
 
 ### Bonus
+
 - Tiny!
 - Super-readable!
 - Changes make sense!
