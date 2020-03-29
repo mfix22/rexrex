@@ -1,52 +1,52 @@
-const ALPHA = '[A-z]'
-const NOT_ALPHA = '[^A-z]'
-const WORD = '\\w'
-const NOT_WORD = '\\W'
-const NUMBER = '\\d'
-const NOT_NUMBER = '\\D'
-const WHITE_SPACE = '\\s'
-const NOT_WHITE_SPACE = '\\S'
-const ANY = '.'
-const START = '^'
-const END = '$'
-const LAZY = '?'
-const GROUP = '?:'
+let ALPHA = '[A-z]'
+let NOT_ALPHA = '[^A-z]'
+let WORD = '\\w'
+let NOT_WORD = '\\W'
+let NUMBER = '\\d'
+let NOT_NUMBER = '\\D'
+let WHITE_SPACE = '\\s'
+let NOT_WHITE_SPACE = '\\S'
+let ANY = '.'
+let START = '^'
+let END = '$'
+let LAZY = '?'
+let GROUP = '?:'
 
-const whole = v => `${START}${v}${END}`
-const repeat = (v, start, end) => {
-  const finish = end === Infinity ? '' : end
+let whole = v => `${START}${v}${END}`
+let repeat = (v, start, end) => {
+  let finish = end === Infinity ? '' : end
 
   return `${v}${start == null ? '' : `{${start}`}${finish != null ? `,${finish}` : ''}${
     start == null ? '' : '}'
   }`
 }
 
-const numeric = repeat.bind(null, NUMBER)
-const alpha = repeat.bind(null, ALPHA)
+let numeric = repeat.bind(null, NUMBER)
+let alpha = repeat.bind(null, ALPHA)
 
-const and = (...rest) => rest.join('')
-const or = (...rest) => rest.join('|')
+let and = (...rest) => rest.join('')
+let or = (...rest) => rest.join('|')
 
-const wildcard = (v, lazy) => `${v}*${lazy ? LAZY : ''}`
-const extra = (v, lazy) => `${v}+${lazy ? LAZY : ''}`
+let wildcard = (v, lazy) => `${v}*${lazy ? LAZY : ''}`
+let extra = (v, lazy) => `${v}+${lazy ? LAZY : ''}`
 
-const capture = (v, name) =>
+let capture = (v, name) =>
   v && v.length ? `(${typeof name === 'string' ? `?<${name}>` : ''}${v})` : ''
 
-const group = v => (v && v.length ? `(${GROUP}${v})` : '')
+let group = v => (v && v.length ? `(${GROUP}${v})` : '')
 
-const ALL = capture(or(ANY, WHITE_SPACE)) // matches any character or whitespace
+let ALL = capture(or(ANY, WHITE_SPACE)) // matches any character or whitespace
 
-const look = (posOrNeg, behindOrAhead) => text =>
+let look = (posOrNeg, behindOrAhead) => text =>
   `(?${behindOrAhead ? '<' : ''}${posOrNeg ? '=' : '!'}${text})`
 
-const looker = bOa =>
+let looker = bOa =>
   Object.assign(look(true, bOa), {
     positive: look(true, bOa),
     negative: look(false, bOa)
   })
 
-const regex = (...args) => new RegExp(...args)
+let regex = (...args) => new RegExp(...args)
 
 module.exports = exports.default = {
   whole,
