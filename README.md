@@ -1,4 +1,4 @@
-# 🐺 `rexrex`
+# 🦖 `rexrex`
 
 > Regular Expression utils that rock!
 
